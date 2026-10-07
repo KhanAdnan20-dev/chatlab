@@ -1,0 +1,426 @@
+{
+  "topics": {
+    "artificial_intelligence": [
+      "artificial intelligence",
+      "ai",
+      "intelligent systems",
+      "ai systems"
+    ],
+    "machine_learning": [
+      "machine learning",
+      "ml",
+      "statistical learning",
+      "machine learning algorithms"
+    ],
+    "natural_language_processing": [
+      "natural language processing",
+      "nlp",
+      "computational linguistics",
+      "text processing"
+    ],
+    "python": [
+      "python",
+      "python programming",
+      "python code"
+    ],
+    "supervised_learning": [
+      "supervised learning",
+      "supervised ml",
+      "supervised machine learning"
+    ],
+    "unsupervised_learning": [
+      "unsupervised learning",
+      "unsupervised ml",
+      "unsupervised machine learning"
+    ],
+    "reinforcement_learning": [
+      "reinforcement learning",
+      "rl",
+      "q-learning",
+      "policy gradient"
+    ],
+    "classification": [
+      "classification",
+      "binary classification",
+      "multiclass classification",
+      "classifier"
+    ],
+    "regression": [
+      "regression",
+      "linear regression",
+      "multivariate regression",
+      "regressor"
+    ],
+    "logistic_regression": [
+      "logistic regression",
+      "logit regression",
+      "sigmoid classifier",
+      "binary logistic regression"
+    ],
+    "decision_tree": [
+      "decision tree",
+      "decision trees",
+      "cart",
+      "id3",
+      "c4.5"
+    ],
+    "random_forest": [
+      "random forest",
+      "random forests",
+      "rf classifier",
+      "random forest regressor"
+    ],
+    "support_vector_machine": [
+      "svm",
+      "support vector machine",
+      "support vector classifier",
+      "support vector machines",
+      "svc"
+    ],
+    "k_nearest_neighbors": [
+      "knn",
+      "k-nearest neighbors",
+      "k nearest neighbors",
+      "k-nn"
+    ],
+    "naive_bayes": [
+      "naive bayes",
+      "gaussian naive bayes",
+      "multinomial naive bayes",
+      "nb classifier"
+    ],
+    "clustering": [
+      "clustering",
+      "cluster analysis",
+      "unsupervised clustering"
+    ],
+    "k_means": [
+      "k-means",
+      "kmeans",
+      "k means clustering",
+      "k-means clustering"
+    ],
+    "principal_component_analysis": [
+      "pca",
+      "principal component analysis",
+      "principal components"
+    ],
+    "dimensionality_reduction": [
+      "dimensionality reduction",
+      "dimension reduction",
+      "feature reduction"
+    ],
+    "bias_variance_tradeoff": [
+      "bias variance tradeoff",
+      "bias-variance tradeoff",
+      "bias and variance",
+      "bias variance dilemma"
+    ],
+    "bias": [
+      "bias",
+      "underfitting error",
+      "model bias"
+    ],
+    "variance": [
+      "variance",
+      "overfitting variance",
+      "model variance"
+    ],
+    "overfitting": [
+      "overfitting",
+      "overfit",
+      "overfitted model"
+    ],
+    "underfitting": [
+      "underfitting",
+      "underfit",
+      "underfitted model"
+    ],
+    "regularization": [
+      "regularization",
+      "l1 regularization",
+      "l2 regularization",
+      "lasso",
+      "ridge",
+      "elastic net"
+    ],
+    "cross_validation": [
+      "cross-validation",
+      "cross validation",
+      "k-fold cross validation",
+      "k fold cv",
+      "stratified k-fold"
+    ],
+    "train_test_split": [
+      "train test split",
+      "train-test split",
+      "holdout validation",
+      "training and test sets"
+    ],
+    "neural_network": [
+      "neural network",
+      "artificial neural network",
+      "ann",
+      "neural nets",
+      "deep neural network"
+    ],
+    "perceptron": [
+      "perceptron",
+      "single layer perceptron",
+      "multi layer perceptron",
+      "mlp"
+    ],
+    "activation_function": [
+      "activation function",
+      "activation functions",
+      "activation layer"
+    ],
+    "relu": [
+      "relu",
+      "rectified linear unit",
+      "leaky relu"
+    ],
+    "sigmoid": [
+      "sigmoid",
+      "sigmoid function",
+      "logistic function"
+    ],
+    "softmax": [
+      "softmax",
+      "softmax function",
+      "normalized exponential"
+    ],
+    "loss_function": [
+      "loss function",
+      "cost function",
+      "objective function",
+      "loss functions"
+    ],
+    "gradient_descent": [
+      "gradient descent",
+      "sgd",
+      "stochastic gradient descent",
+      "mini-batch gradient descent",
+      "adam optimizer"
+    ],
+    "backpropagation": [
+      "backpropagation",
+      "backprop",
+      "backward propagation of errors"
+    ],
+    "hyperparameters": [
+      "learning rate",
+      "batch size",
+      "epoch",
+      "epochs",
+      "hyperparameter",
+      "hyperparameters"
+    ],
+    "convolutional_neural_network": [
+      "cnn",
+      "convolutional neural network",
+      "convolutional neural networks",
+      "convnet"
+    ],
+    "recurrent_neural_network": [
+      "rnn",
+      "recurrent neural network",
+      "recurrent neural networks"
+    ],
+    "lstm": [
+      "lstm",
+      "long short-term memory",
+      "long short term memory"
+    ],
+    "gru": [
+      "gru",
+      "gated recurrent unit"
+    ],
+    "attention_mechanism": [
+      "attention",
+      "attention mechanism",
+      "self-attention",
+      "multi-head attention"
+    ],
+    "transformer": [
+      "transformer",
+      "transformers",
+      "transformer architecture",
+      "bert",
+      "gpt",
+      "qwen",
+      "llama"
+    ],
+    "embeddings": [
+      "embeddings",
+      "word embeddings",
+      "sentence embeddings",
+      "word2vec",
+      "glove"
+    ],
+    "tokenization": [
+      "tokenization",
+      "tokenizer",
+      "tokenizing",
+      "word tokenization",
+      "bpe"
+    ],
+    "stemming": [
+      "stemming",
+      "porter stemmer",
+      "snowball stemmer"
+    ],
+    "lemmatization": [
+      "lemmatization",
+      "lemmatizer",
+      "wordnet lemmatizer"
+    ],
+    "tfidf": [
+      "tf-idf",
+      "tfidf",
+      "term frequency inverse document frequency"
+    ],
+    "named_entity_recognition": [
+      "ner",
+      "named entity recognition",
+      "entity extraction"
+    ],
+    "sentiment_analysis": [
+      "sentiment analysis",
+      "opinion mining",
+      "polarity classification"
+    ],
+    "language_model": [
+      "language model",
+      "language models",
+      "llm",
+      "large language model"
+    ],
+    "search_algorithms": [
+      "search algorithms",
+      "bfs",
+      "dfs",
+      "a* search",
+      "heuristic search",
+      "minimax"
+    ],
+    "knowledge_representation": [
+      "knowledge representation",
+      "ontologies",
+      "semantic networks",
+      "knowledge graph"
+    ],
+    "reasoning": [
+      "reasoning",
+      "deductive reasoning",
+      "inductive reasoning",
+      "forward chaining",
+      "backward chaining"
+    ],
+    "ai_agent": [
+      "agent",
+      "agents",
+      "ai agent",
+      "intelligent agent",
+      "multi-agent system"
+    ],
+    "expert_systems": [
+      "expert system",
+      "expert systems",
+      "rule-based system",
+      "inference engine"
+    ],
+    "fuzzy_logic": [
+      "fuzzy logic",
+      "fuzzy systems",
+      "soft computing"
+    ],
+    "fuzzy_sets": [
+      "fuzzy set",
+      "fuzzy sets",
+      "fuzzy subset"
+    ],
+    "membership_function": [
+      "membership function",
+      "membership functions",
+      "triangular membership",
+      "trapezoidal membership"
+    ],
+    "mamdani_inference": [
+      "mamdani",
+      "mamdani inference",
+      "mamdani fuzzy system"
+    ],
+    "sugeno_inference": [
+      "sugeno",
+      "takagi-sugeno",
+      "sugeno inference"
+    ],
+    "defuzzification": [
+      "defuzzification",
+      "centroid defuzzification",
+      "center of gravity",
+      "defuzzify"
+    ],
+    "genetic_algorithm": [
+      "genetic algorithm",
+      "genetic algorithms",
+      "ga",
+      "crossover",
+      "mutation"
+    ],
+    "neuro_fuzzy": [
+      "neuro-fuzzy",
+      "neuro fuzzy",
+      "anfis",
+      "adaptive neuro fuzzy inference system"
+    ],
+    "accuracy": [
+      "accuracy",
+      "classification accuracy"
+    ],
+    "precision": [
+      "precision",
+      "positive predictive value"
+    ],
+    "recall": [
+      "recall",
+      "sensitivity",
+      "true positive rate"
+    ],
+    "f1_score": [
+      "f1",
+      "f1 score",
+      "f1-score",
+      "f-measure"
+    ],
+    "confusion_matrix": [
+      "confusion matrix",
+      "error matrix"
+    ],
+    "roc_auc": [
+      "roc",
+      "auc",
+      "roc-auc",
+      "roc curve",
+      "area under the curve"
+    ],
+    "mae": [
+      "mae",
+      "mean absolute error"
+    ],
+    "mse": [
+      "mse",
+      "mean squared error"
+    ],
+    "rmse": [
+      "rmse",
+      "root mean squared error"
+    ],
+    "r_squared": [
+      "r-squared",
+      "r2 score",
+      "coefficient of determination"
+    ]
+  }
+}

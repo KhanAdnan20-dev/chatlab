@@ -1,0 +1,35 @@
+# Python & Virtual Environments
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.env
+.pytest_cache/
+
+# Large Model Weights & Checkpoints (Keep local, do not commit to Git)
+models/qwen3-4b-bnb-4bit/
+models/all-MiniLM-L6-v2/
+models/qwen3-4b-qlora-adapter/
+models/*.safetensors
+models/*.bin
+models/*.pt
+models/*.gguf
+checkpoints/
+
+# Local Data Caches
+data/nltk_data/
+.cache/
+
+# Node & Frontend Build Artifacts
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# Logs & Temporary Files
+*.log
+scratch/
+unsloth_compiled_cache/
+
