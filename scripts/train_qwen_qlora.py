@@ -50,8 +50,8 @@ class QLoraTrainingConfig:
     warmup_ratio_pct: float = float(os.getenv("WARMUP_RATIO", "0.05"))
     weight_decay: float = 0.01
     lr_scheduler_type: str = "cosine"
-    fp16: bool = True
-    bf16: bool = False
+    fp16: bool = False
+    bf16: bool = True
 
     # LoRA Adapter Configuration
     lora_r: int = int(os.getenv("LORA_R", "16"))
@@ -118,6 +118,7 @@ def run_training(config: QLoraTrainingConfig = None, dry_run: bool = False) -> N
     print(f"Effective Batch:     {config.per_device_train_batch_size * config.gradient_accumulation_steps}")
     print(f"Learning Rate:       {config.learning_rate}")
     print(f"Epochs:              {config.num_train_epochs}")
+    print(f"Precision:           {'BF16' if config.bf16 else ('FP16' if config.fp16 else 'FP32')}")
     print(f"LoRA Config:         r={config.lora_r}, alpha={config.lora_alpha}, dropout={config.lora_dropout}")
     print("-" * 80)
 
@@ -136,11 +137,12 @@ def run_training(config: QLoraTrainingConfig = None, dry_run: bool = False) -> N
         print("Ensure 'requirements-gpu.txt' packages (transformers, peft, trl, bitsandbytes, datasets) are installed.")
         return
 
-    # 1. 4-bit Quantization Configuration
+    # 1. 4-bit Quantization Configuration (using bfloat16 compute dtype for RTX 4050)
+    compute_dtype = torch.bfloat16 if config.bf16 else (torch.float16 if config.fp16 else torch.float32)
     bnb_config = BitsAndBytesConfig(
         load_in_4bit=True,
         bnb_4bit_quant_type="nf4",
-        bnb_4bit_compute_dtype=torch.float16 if config.fp16 else torch.float32,
+        bnb_4bit_compute_dtype=compute_dtype,
         bnb_4bit_use_double_quant=True,
     )
 
@@ -161,6 +163,7 @@ def run_training(config: QLoraTrainingConfig = None, dry_run: bool = False) -> N
         trust_remote_code=True,
         local_files_only=True,
     )
+    model.config.use_cache = False
 
     # 3. Prepare Model for QLoRA
     print("\n[2/4] Initializing PEFT LoRA adapter...")
