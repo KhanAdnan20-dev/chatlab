@@ -1,0 +1,198 @@
+{
+  "questions": [
+    {
+      "id": "q1",
+      "question": "What is the primary objective of Supervised Learning?",
+      "options": [
+        "To group unlabeled data into natural clusters",
+        "To learn a mapping function from input features to target labels using labeled data",
+        "To learn optimal actions by receiving continuous rewards from an environment",
+        "To compress input features into a lower-dimensional space without target output"
+      ],
+      "correct_answer": 1,
+      "explanation": "Supervised Learning uses pairs of input features and ground-truth labels to train a function that predicts outputs for new inputs.",
+      "topic": "Supervised Learning",
+      "difficulty": "easy"
+    },
+    {
+      "id": "q2",
+      "question": "Which activation function suffers from the 'Dying ReLU' problem?",
+      "options": [
+        "Sigmoid",
+        "Tanh",
+        "Rectified Linear Unit (ReLU)",
+        "Leaky ReLU"
+      ],
+      "correct_answer": 2,
+      "explanation": "Standard ReLU outputs zero for negative inputs with zero gradient, which can cause neurons to become permanently inactive during backpropagation.",
+      "topic": "Deep Learning",
+      "difficulty": "medium"
+    },
+    {
+      "id": "q3",
+      "question": "In Mamdani Fuzzy Logic Systems, what process converts a fuzzy set output into a crisp scalar value?",
+      "options": [
+        "Fuzzification",
+        "Rule Evaluation",
+        "Defuzzification (e.g. Centroid/COA)",
+        "Aggregation"
+      ],
+      "correct_answer": 2,
+      "explanation": "Defuzzification calculates a crisp representative output value from the aggregated fuzzy output membership function.",
+      "topic": "Fuzzy Logic",
+      "difficulty": "medium"
+    },
+    {
+      "id": "q4",
+      "question": "What does TF-IDF measure in Natural Language Processing?",
+      "options": [
+        "The semantic distance between word vectors",
+        "The importance of a word in a document relative to a corpus of documents",
+        "The sequence probability of a word given prior tokens",
+        "The computational complexity of tokenization"
+      ],
+      "correct_answer": 1,
+      "explanation": "TF-IDF combines Term Frequency and Inverse Document Frequency to highlight words that are frequent in a specific document but rare across the corpus.",
+      "topic": "NLP",
+      "difficulty": "easy"
+    },
+    {
+      "id": "q5",
+      "question": "What is the main advantage of Low-Rank Adaptation (LoRA) for parameter-efficient fine-tuning?",
+      "options": [
+        "It freezes base model parameters and injects trainable rank decomposition matrices, drastically reducing trainable parameters",
+        "It increases the total parameter count to improve model accuracy",
+        "It eliminates the need for backpropagation entirely",
+        "It converts dense matrices into binary sparse representations"
+      ],
+      "correct_answer": 0,
+      "explanation": "LoRA freezes pre-trained weights and adds low-rank decomposition matrices (A and B), reducing VRAM and parameter count needed during SFT.",
+      "topic": "LLM Fine-tuning",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q6",
+      "question": "In decision tree classifiers, which metric measures the impurity of a node split?",
+      "options": [
+        "Gini Impurity / Entropy",
+        "Cosine Distance",
+        "Mahalanobis Distance",
+        "F1-Score"
+      ],
+      "correct_answer": 0,
+      "explanation": "Gini Impurity and Information Entropy measure variance in label distribution to evaluate splits.",
+      "topic": "Machine Learning",
+      "difficulty": "easy"
+    },
+    {
+      "id": "q7",
+      "question": "What mechanism allows Transformer architectures to model long-range context efficiently?",
+      "options": [
+        "Recurrent hidden state passing",
+        "Multi-Head Self-Attention",
+        "Convolutional pooling filters",
+        "Stochastic Gradient Descent"
+      ],
+      "correct_answer": 1,
+      "explanation": "Multi-Head Self-Attention computes pairwise query-key alignment scores across all tokens in parallel.",
+      "topic": "Transformers",
+      "difficulty": "medium"
+    },
+    {
+      "id": "q_co1",
+      "co": "CO1",
+      "unit": "Unit I",
+      "question": "According to Lotfi A. Zadeh, what is the fundamental philosophical distinction between Hard Computing and Soft Computing?",
+      "options": [
+        "Hard computing relies on parallel hardware, whereas soft computing requires sequential microprocessors.",
+        "Hard computing demands precise mathematical models and binary certainty, whereas soft computing exploits tolerance for imprecision, uncertainty, and partial truth.",
+        "Hard computing is exclusively used for natural language processing, while soft computing is for numerical analysis.",
+        "Hard computing uses floating-point numbers, whereas soft computing uses integers only."
+      ],
+      "correct_answer": 1,
+      "explanation": "Zadeh (1994) defined soft computing as the exploitation of tolerance for imprecision, uncertainty, and partial truth to achieve tractability, robustness, and low solution cost.",
+      "topic": "Soft Computing Foundations (CO1)",
+      "difficulty": "medium"
+    },
+    {
+      "id": "q_co2",
+      "co": "CO2",
+      "unit": "Unit II",
+      "question": "For the A* search algorithm to guarantee finding an optimal solution on trees, what mathematical condition must the heuristic function h(n) satisfy?",
+      "options": [
+        "h(n) must be strictly greater than the actual remaining cost h*(n) to encourage deep exploration.",
+        "h(n) must be admissible, meaning h(n) <= h*(n) for all nodes and h(goal) = 0 (it never overestimates the true cost).",
+        "h(n) must equal the path cost g(n) from the start node.",
+        "h(n) must be negative to minimize the total evaluation function f(n)."
+      ],
+      "correct_answer": 1,
+      "explanation": "Admissibility requires h(n) <= h*(n), ensuring A* never overlooks an optimal path by overestimating its true remaining cost.",
+      "topic": "Informed Search & A* (CO2)",
+      "difficulty": "medium"
+    },
+    {
+      "id": "q_co3",
+      "co": "CO3",
+      "unit": "Unit III",
+      "question": "In First-Order Predicate Logic (FOPL), how does Robinson's Resolution Refutation prove that a knowledge base KB entails a query α (KB |= α)?",
+      "options": [
+        "By converting KB into DNF and checking if every clause evaluates to true.",
+        "By adding ¬α to KB in Conjunctive Normal Form (CNF) and systematically resolving complementary literals until deriving the empty clause Box (contradiction).",
+        "By applying forward chaining until an infinite loop is detected.",
+        "By substituting random ground terms into existential quantifiers until a match occurs."
+      ],
+      "correct_answer": 1,
+      "explanation": "Resolution refutation negates the goal (KB ∧ ¬α) in CNF. Deriving the empty clause (NIL / □) proves contradiction, thereby proving KB |= α.",
+      "topic": "Knowledge & Resolution (CO3)",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_co4",
+      "co": "CO4",
+      "unit": "Unit IV",
+      "question": "What is the key architectural difference between Mamdani Fuzzy Inference Systems and Takagi-Sugeno-Kang (TSK / Sugeno) FIS?",
+      "options": [
+        "Mamdani FIS uses fuzzy membership sets in the rule consequent requiring Centroid defuzzification, whereas Sugeno FIS uses linear mathematical functions (z = px + qy + r) defuzzified via Weighted Average.",
+        "Mamdani FIS can only take binary inputs, whereas Sugeno FIS accepts continuous values.",
+        "Sugeno FIS does not use fuzzification, whereas Mamdani FIS does.",
+        "Mamdani FIS uses neural network backpropagation, while Sugeno FIS uses genetic algorithms."
+      ],
+      "correct_answer": 0,
+      "explanation": "Mamdani FIS produces fuzzy output sets (defuzzified using Centroid of Area), while Sugeno produces mathematical linear functions in rule consequents (defuzzified via fast Weighted Average).",
+      "topic": "Fuzzy Inference Systems (CO4)",
+      "difficulty": "hard"
+    },
+    {
+      "id": "q_co5",
+      "co": "CO5",
+      "unit": "Unit V",
+      "question": "What historic theoretical limitation of single-layer perceptrons did Marvin Minsky and Seymour Papert prove in 1969?",
+      "options": [
+        "Single-layer perceptrons cannot implement linearly separable functions like AND or OR.",
+        "Single-layer perceptrons cannot solve non-linearly separable problems like the XOR (Exclusive-OR) logic gate.",
+        "Perceptrons cannot use numerical weights with floating point values.",
+        "The perceptron learning rule never converges even on linearly separable datasets."
+      ],
+      "correct_answer": 1,
+      "explanation": "Minsky and Papert proved that a single hyperplane cannot separate the XOR truth table, establishing the need for multilayer perceptrons with nonlinear hidden activations.",
+      "topic": "Neural Networks & Perceptrons (CO5)",
+      "difficulty": "medium"
+    },
+    {
+      "id": "q_co6",
+      "co": "CO6",
+      "unit": "Unit VI",
+      "question": "In the 5-Layer ANFIS (Adaptive Neuro-Fuzzy Inference System) architecture, what does the Hybrid Learning Algorithm do?",
+      "options": [
+        "It uses a genetic algorithm for the forward pass and simulated annealing for the backward pass.",
+        "In the forward pass, premise parameters are fixed and consequent parameters {p, q, r} are solved via Least Squares Estimation (LSE); in the backward pass, consequent parameters are fixed and premise parameters {a, b, c} are updated via gradient descent backpropagation.",
+        "It trains layer 1 with reinforcement learning and layer 5 with k-means clustering.",
+        "It converts the neural network weights into crisp binary truth tables."
+      ],
+      "correct_answer": 1,
+      "explanation": "Jang's ANFIS hybrid learning rule combines Least Squares Estimation (LSE) for fast linear parameter identification in the forward pass with Backpropagation for nonlinear premise tuning in the backward pass.",
+      "topic": "Hybrid Systems & ANFIS (CO6)",
+      "difficulty": "hard"
+    }
+  ]
+}

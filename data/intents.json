@@ -1031,6 +1031,36 @@
         "Explanation: The chosen answer is correct because in this algorithm, the objective function explicitly penalizes that parameter variation.",
         "Why this is correct: 1) Principle: It models the true posterior distribution, 2) Distractor analysis: Other options confound sample variance with irreducible error."
       ]
+    },
+    {
+      "intent": "learning_roadmap",
+      "description": "Requests for AI/ML study roadmaps, learning paths, curriculum, and skill progression",
+      "patterns": [
+        "roadmap to learn ml",
+        "roadmap to learn machine learning",
+        "how should I learn ML",
+        "give me a machine learning roadmap",
+        "how do I start learning machine learning",
+        "ML learning path",
+        "what should I learn first in machine learning",
+        "machine learning study roadmap",
+        "beginner roadmap for AI and ML",
+        "how should I progress from Python to ML",
+        "what topics should I study for machine learning",
+        "roadmap to learn AI",
+        "learning path for deep learning",
+        "how to become a machine learning engineer",
+        "step by step guide to learn ML",
+        "AI learning roadmap",
+        "curriculum to master machine learning",
+        "what to learn in artificial intelligence",
+        "machine learning engineer study plan",
+        "roadmap for learning data science and ml"
+      ],
+      "responses": [
+        "Here is a recommended 5-stage Machine Learning Roadmap:\n1. Mathematics & Statistics (Linear Algebra, Calculus, Probability)\n2. Python Programming & Libraries (NumPy, Pandas, Matplotlib, Scikit-Learn)\n3. Classical Machine Learning (Supervised/Unsupervised Algorithms, Model Evaluation)\n4. Deep Learning & Neural Networks (PyTorch/TensorFlow, CNNs, Transformers)\n5. Deployment & MLOps (FastAPI, Docker, Model Monitoring)\n\nWhich stage would you like to explore in detail?",
+        "To master Machine Learning step-by-step:\nPhase 1: Foundations — Python, Linear Algebra, Multivariable Calculus, and Statistics.\nPhase 2: Core ML — Regression, Classification, Clustering, Random Forests, SVMs, and Evaluation Metrics.\nPhase 3: Deep Learning — Artificial Neural Networks, Backpropagation, CNNs, RNNs, and Attention Mechanisms.\nPhase 4: Practical Projects — End-to-end model building, API deployment, and fine-tuning."
+      ]
     }
   ]
 }

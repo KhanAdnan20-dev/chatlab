@@ -1,0 +1,80 @@
+{
+  "Journey_A": {
+    "status_code_1": 200,
+    "intent_1": "concept_explanation",
+    "citations_count_1": 4,
+    "citation_1_codes": [
+      "[S1]",
+      "[S2]",
+      "[S3]",
+      "[S4]"
+    ],
+    "status_code_2": 200,
+    "intent_2": "concept_explanation",
+    "routing_reason_2": "Mamdani Fuzzy Query Profile derived for Gemma 4 E2B Instruct prompt orchestration.",
+    "session_preserved": true
+  },
+  "Journey_B": {
+    "status_code": 200,
+    "intent": "unknown",
+    "citations_count": 0,
+    "routing_reason": "Mamdani Fuzzy Query Profile derived for Gemma 4 E2B Instruct prompt orchestration."
+  },
+  "Journey_C": {
+    "status_code": 200,
+    "intent": "concept_definition",
+    "citations_count": 0,
+    "response": "In AIML, a definition provides the formal foundation. For ex"
+  },
+  "Journey_D": {
+    "status_code": 200,
+    "intent": "concept_explanation",
+    "citations_count": 4,
+    "first_citation": {
+      "citation_code": "[S1]",
+      "source_title": "Speech And Language Processing",
+      "section": "PDF p. 191",
+      "content_snippet": "might be attending to the context for different purposes: heads might be special-\nized to represent different linguistic relationships between context elements and the\ncurrent token, or to look for particular kinds of patterns in the context.\nSo in multi-head attention we have A separate attention h...",
+      "formulas": [],
+      "file_name": "speech_and_language_processing.pdf",
+      "page_start": 191,
+      "page_end": 191,
+      "subject": "nlp_llm",
+      "score": 0.6947,
+      "source_url": null
+    }
+  },
+  "Journey_E": {
+    "status_code": 200,
+    "citations_count": 0,
+    "response_available": true,
+    "fallback": false
+  },
+  "Journey_F": {
+    "status_code": 200,
+    "total_chunks": 26,
+    "token_chunks": 25,
+    "has_metadata": true,
+    "citations_in_meta": 4
+  },
+  "Journey_G": {
+    "start_status": 201,
+    "session_id": "30f0a4f8-4f26-486b-9e8c-22205daa03cd",
+    "total_questions": 3,
+    "final_completed": true,
+    "score_percent": 33.3,
+    "correct_count": 1
+  },
+  "Journey_H": {
+    "turn_1_citations": 4,
+    "turn_2_citations": 0,
+    "turn_3_citations": 4,
+    "turn_2_properly_empty_citations": true,
+    "session_preserved": true
+  },
+  "Journey_I": {
+    "empty_message_status": 422,
+    "invalid_quiz_session_status": 404,
+    "out_of_bounds_answer_status": 422
+  }
+}

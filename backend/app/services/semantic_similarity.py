@@ -89,7 +89,7 @@ class SemanticSimilarityEngine:
             # Try loading local dense sentence-transformer model first
             if _SENTENCE_TRANSFORMERS_AVAILABLE and self.dense_model_path.exists():
                 try:
-                    self.dense_model = SentenceTransformer(str(self.dense_model_path))
+                    self.dense_model = SentenceTransformer(str(self.dense_model_path), device="cpu")
                     # Encode and normalize all patterns
                     embeddings = self.dense_model.encode(
                         self.patterns,
@@ -182,6 +182,9 @@ class SemanticSimilarityEngine:
             )
 
         return SimilarityMatch(score=0.0, matched_pattern="", matched_intent="unknown")
+
+    # Convenience alias
+    compute_similarity = find_best_match
 
 
 # Singleton instance reused across requests

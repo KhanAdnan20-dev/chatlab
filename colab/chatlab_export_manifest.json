@@ -1,0 +1,158 @@
+{
+  "project": "ChatLab",
+  "export_date": "2026-10-07",
+  "files": [
+    {
+      "path": "backend/main.py",
+      "classification": "CORE_RUNTIME"
+    },
+    {
+      "path": "backend/app/config.py",
+      "classification": "CORE_RUNTIME"
+    },
+    {
+      "path": "backend/app/router.py",
+      "classification": "CORE_RUNTIME"
+    },
+    {
+      "path": "backend/app/schemas.py",
+      "classification": "CORE_RUNTIME"
+    },
+    {
+      "path": "backend/app/exceptions.py",
+      "classification": "CORE_RUNTIME"
+    },
+    {
+      "path": "backend/app/api/chat_router.py",
+      "classification": "CORE_RUNTIME"
+    },
+    {
+      "path": "backend/app/api/quiz_router.py",
+      "classification": "CORE_RUNTIME"
+    },
+    {
+      "path": "backend/app/services/chatbot.py",
+      "classification": "CORE_RUNTIME"
+    },
+    {
+      "path": "backend/app/services/chat_engine.py",
+      "classification": "CORE_RUNTIME"
+    },
+    {
+      "path": "backend/app/services/conversation_memory.py",
+      "classification": "CORE_RUNTIME"
+    },
+    {
+      "path": "backend/app/services/entity_extractor.py",
+      "classification": "CORE_RUNTIME"
+    },
+    {
+      "path": "backend/app/services/fuzzy_router.py",
+      "classification": "CORE_RUNTIME"
+    },
+    {
+      "path": "backend/app/services/intent_classifier.py",
+      "classification": "CORE_RUNTIME"
+    },
+    {
+      "path": "backend/app/services/model_manager.py",
+      "classification": "CORE_RUNTIME"
+    },
+    {
+      "path": "backend/app/services/preprocessing.py",
+      "classification": "CORE_RUNTIME"
+    },
+    {
+      "path": "backend/app/services/quiz_engine.py",
+      "classification": "CORE_RUNTIME"
+    },
+    {
+      "path": "backend/app/services/response_engine.py",
+      "classification": "CORE_RUNTIME"
+    },
+    {
+      "path": "backend/app/services/response_postprocessor.py",
+      "classification": "CORE_RUNTIME"
+    },
+    {
+      "path": "backend/app/services/semantic_similarity.py",
+      "classification": "CORE_RUNTIME"
+    },
+    {
+      "path": "scripts/train_qwen_qlora.py",
+      "classification": "TRAINING"
+    },
+    {
+      "path": "scripts/validate_dataset.py",
+      "classification": "TRAINING"
+    },
+    {
+      "path": "scripts/build_intents_dataset.py",
+      "classification": "TRAINING"
+    },
+    {
+      "path": "data/qa_dataset.jsonl",
+      "classification": "DATA"
+    },
+    {
+      "path": "data/qa_train.jsonl",
+      "classification": "DATA"
+    },
+    {
+      "path": "data/qa_validation.jsonl",
+      "classification": "DATA"
+    },
+    {
+      "path": "data/qa_test.jsonl",
+      "classification": "DATA"
+    },
+    {
+      "path": "data/quiz_questions.json",
+      "classification": "DATA"
+    },
+    {
+      "path": "data/intents.json",
+      "classification": "DATA"
+    },
+    {
+      "path": "data/aiml_topics.json",
+      "classification": "DATA"
+    },
+    {
+      "path": "frontend/src/App.jsx",
+      "classification": "FRONTEND"
+    },
+    {
+      "path": "frontend/src/services/api.js",
+      "classification": "FRONTEND"
+    },
+    {
+      "path": "tests/test_api.py",
+      "classification": "TEST"
+    },
+    {
+      "path": "tests/test_chat_orchestrator.py",
+      "classification": "TEST"
+    },
+    {
+      "path": "tests/test_conversation_memory.py",
+      "classification": "TEST"
+    },
+    {
+      "path": "tests/test_quiz_engine.py",
+      "classification": "TEST"
+    },
+    {
+      "path": "docs/system_architecture.md",
+      "classification": "DOCUMENTATION"
+    },
+    {
+      "path": "docs/service_architecture.md",
+      "classification": "DOCUMENTATION"
+    },
+    {
+      "path": "docs/api.md",
+      "classification": "DOCUMENTATION"
+    }
+  ]
+}

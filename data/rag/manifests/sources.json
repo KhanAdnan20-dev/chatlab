@@ -1,0 +1,34 @@
+{
+  "sources": [
+    {
+      "source_id": "google_mlcc",
+      "title": "Google Machine Learning Crash Course",
+      "source_url": "https://developers.google.com/machine-learning/crash-course/",
+      "subject": "machine_learning"
+    },
+    {
+      "source_id": "sklearn_user_guide",
+      "title": "scikit-learn User Guide",
+      "source_url": "https://scikit-learn.org/stable/user_guide.html",
+      "subject": "machine_learning"
+    },
+    {
+      "source_id": "d2l",
+      "title": "Dive into Deep Learning",
+      "source_url": "https://d2l.ai/",
+      "subject": "deep_learning"
+    },
+    {
+      "source_id": "pytorch_tutorials",
+      "title": "PyTorch Tutorials",
+      "source_url": "https://docs.pytorch.org/tutorials/",
+      "subject": "deep_learning"
+    },
+    {
+      "source_id": "huggingface_course",
+      "title": "Hugging Face LLM Course",
+      "source_url": "https://huggingface.co/learn/llm-course/chapter1/1",
+      "subject": "nlp_llm"
+    }
+  ]
+}

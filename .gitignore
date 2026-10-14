@@ -19,8 +19,9 @@ models/*.pt
 models/*.gguf
 checkpoints/
 
-# Local Data Caches
+# Local Data Caches & Raw Corpora
 data/nltk_data/
+data/rag/raw/
 .cache/
 
 # Node & Frontend Build Artifacts
@@ -32,4 +33,6 @@ frontend/.vite/
 *.log
 scratch/
 unsloth_compiled_cache/
+test-results/
+*.zip
 

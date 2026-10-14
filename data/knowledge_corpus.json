@@ -1,0 +1,331 @@
+[
+  {
+    "id": "kb_lin_reg",
+    "concept_id": "lin_reg",
+    "title": "Ordinary Least Squares and Ridge/Lasso Regularization",
+    "source": "Pattern Recognition and Machine Learning (Bishop, 2006)",
+    "section": "§3.1 Linear Basis Function Models",
+    "citation": "[Bishop-PRML-§3.1]",
+    "content": "Linear regression models the relationship between dependent continuous variable y and feature vector x via parameters w: y(x, w) = w^T x + \u03f5. Under Gaussian noise assumption, minimizing sum of squared errors corresponds to maximum likelihood estimation. The closed-form Normal Equation solution is w* = (X^T X)^{-1} X^T y. To combat multicollinearity and overfitting in high dimensions, regularization is added: L2 Ridge regression minimizes ||y - Xw||^2 + \u03bb||w||_2^2 yielding w* = (X^T X + \u03bbI)^{-1} X^T y, which shrinks weights toward zero. L1 Lasso regression minimizes ||y - Xw||^2 + \u03bb||w||_1, producing sparse solutions where non-informative feature weights become identically zero due to the diamond geometry of the L1 ball.",
+    "formulas": [
+      "w^* = (X^T X + \\lambda I)^{-1} X^T y",
+      "\\mathcal{L}_{Lasso}(w) = \\frac{1}{2N} \\|y - Xw\\|_2^2 + \\lambda \\|w\\|_1"
+    ],
+    "keywords": ["linear regression", "ridge", "lasso", "normal equation", "l1", "l2", "regularization", "least squares"]
+  },
+  {
+    "id": "kb_log_reg",
+    "concept_id": "log_reg",
+    "title": "Logistic Regression and Cross-Entropy Loss",
+    "source": "Deep Learning (Goodfellow, Bengio & Courville, 2016)",
+    "section": "§5.7 Supervised Learning Algorithms",
+    "citation": "[Goodfellow-DL-§5.7]",
+    "content": "Logistic regression models categorical probabilities using the sigmoid link function \u03c3(z) = 1 / (1 + e^{-z}), where z = w^T x + b. Since the output represents probability P(Y=1|x), parameters w are estimated via Maximum Likelihood Estimation. Negative log-likelihood yields the Binary Cross-Entropy (BCE) loss: L(w) = - [y log(\u0177) + (1 - y) log(1 - \u0177)]. Unlike mean squared error on classification, the cross-entropy loss surface is strictly convex with respect to w, guaranteeing convergence to a global minimum via gradient descent. For multiclass classification with K classes, the softmax operator generalizes sigmoid: P(Y=k|x) = exp(z_k) / \\sum_j exp(z_j).",
+    "formulas": [
+      "\\sigma(z) = \\frac{1}{1 + e^{-z}}",
+      "\\mathcal{L}_{BCE} = -\\frac{1}{N} \\sum_{i=1}^N [y_i \\log(\\hat{y}_i) + (1 - y_i) \\log(1 - \\hat{y}_i)]",
+      "\\text{Softmax}(z)_k = \\frac{e^{z_k}}{\\sum_{j=1}^K e^{z_j}}"
+    ],
+    "keywords": ["logistic regression", "cross entropy", "sigmoid", "softmax", "binary classification", "mle"]
+  },
+  {
+    "id": "kb_backprop",
+    "concept_id": "backprop_mlp",
+    "title": "The Backpropagation Algorithm and Computational Graphs",
+    "source": "Deep Learning (Goodfellow, Bengio & Courville, 2016)",
+    "section": "§6.5 Back-Propagation and Other Differentiation Algorithms",
+    "citation": "[Goodfellow-DL-§6.5]",
+    "content": "Backpropagation computes the gradient of a scalar loss function L with respect to all trainable parameters in a computational directed acyclic graph (DAG). During the forward pass, intermediate activations are computed and cached in memory. In the backward pass, the multivariable chain rule propagates error signals backward from output to inputs. For layer l with weights W^(l) and activation a^(l) = \u03c3(z^(l)), the gradient is \u2202L/\u2202W^(l) = \u03b4^(l) (a^(l-1))^T, where error vector \u03b4^(l) = ((W^(l+1))^T \u03b4^(l+1)) \u2299 \u03c3'(z^(l)). Modern deep networks replace manual derivation with reverse-mode automatic differentiation (Autograd).",
+    "formulas": [
+      "\\delta^{(l)} = ((W^{(l+1)})^T \\delta^{(l+1)}) \\odot \\sigma'(z^{(l)})",
+      "\\frac{\\partial \\mathcal{L}}{\\partial W^{(l)}} = \\delta^{(l)} (a^{(l-1)})^T"
+    ],
+    "keywords": ["backpropagation", "chain rule", "gradient", "computational graph", "autograd", "mlp", "neural network"]
+  },
+  {
+    "id": "kb_optimizers",
+    "concept_id": "grad_descent",
+    "title": "Adaptive Gradient Optimizers: Momentum, RMSprop, Adam and AdamW",
+    "source": "Decoupled Weight Decay Regularization (Loshchilov & Hutter, 2019)",
+    "section": "§2 Decoupled Weight Decay in Adam",
+    "citation": "[Loshchilov-AdamW-2019]",
+    "content": "Standard Stochastic Gradient Descent (SGD) struggles with ill-conditioned loss curvatures where gradients oscillate in steep directions while making slow progress along flatter ravines. Polyak Momentum accelerates convergence by accumulating an exponentially decaying moving average of past gradients: v_t = \u03b2 v_{t-1} + g_t. RMSprop adapts individual learning rates per parameter by dividing by root-mean-square of recent gradients: s_t = \u03b2_2 s_{t-1} + (1 - \u03b2_2) g_t^2. Adam (Adaptive Moment Estimation) combines first moment (momentum) and second moment (uncentered variance) with bias-correction factors: m_t / (1 - \u03b2_1^t) and v_t / (1 - \u03b2_2^t). Crucially, AdamW decouples L2 weight decay from gradient updates: theta_t = theta_{t-1} - \u03b7 \u03bb theta_{t-1} - \u03b7 m_hat_t / (sqrt(v_hat_t) + \u03f5). In standard Adam, L2 regularization gets scaled down for parameters with large historical gradients, severely reducing effective weight decay; AdamW restores proper regularization.",
+    "formulas": [
+      "m_t = \\beta_1 m_{t-1} + (1 - \\beta_1) g_t, \\quad v_t = \\beta_2 v_{t-1} + (1 - \\beta_2) g_t^2",
+      "\\hat{m}_t = \\frac{m_t}{1 - \\beta_1^t}, \\quad \\hat{v}_t = \\frac{v_t}{1 - \\beta_2^t}",
+      "\\theta_t = \\theta_{t-1} - \\eta \\lambda \\theta_{t-1} - \\frac{\\eta}{\\sqrt{\\hat{v}_t} + \\epsilon} \\hat{m}_t"
+    ],
+    "keywords": ["adam", "adamw", "momentum", "rmsprop", "sgd", "optimizer", "weight decay", "learning rate"]
+  },
+  {
+    "id": "kb_normalization",
+    "concept_id": "dl_regularization",
+    "title": "Batch Normalization vs Layer Normalization",
+    "source": "Layer Normalization (Ba, Kiros & Hinton, 2016)",
+    "section": "§1 & §2 Introduction & Layer Normalization Formulation",
+    "citation": "[Ba-LayerNorm-2016]",
+    "content": "Internal covariate shift and exploding/vanishing activations slow training in deep models. Batch Normalization (Ioffe & Szegedy, 2015) normalizes across the batch dimension B for each feature channel: \\hat{x} = (x - \\mu_B) / \\sqrt{\\sigma_B^2 + \\epsilon}. However, BatchNorm fails on recurrent/sequential architectures and small batch sizes because batch statistics become noisy and cannot handle variable sequence lengths. Layer Normalization (Ba et al., 2016) resolves this by computing statistics across all hidden units within a single training sample independently: \\mu = \\frac{1}{H} \\sum_{i=1}^H x_i and \\sigma^2 = \\frac{1}{H} \\sum_{i=1}^H (x_i - \\mu)^2. LayerNorm applies learnable gain \\gamma and bias \\beta: y = \\gamma \\hat{x} + \\beta. Because LayerNorm is entirely independent of batch size and other examples in the batch, it is the standard normalization method for Transformers and autoregressive LLMs (e.g. Pre-LN, RMSNorm).",
+    "formulas": [
+      "\\text{LayerNorm}(x) = \\frac{x - \\mu_L}{\\sqrt{\\sigma_L^2 + \\epsilon}} \\odot \\gamma + \\beta",
+      "\\text{RMSNorm}(x) = \\frac{x}{\\sqrt{\\frac{1}{d} \\sum_{i=1}^d x_i^2 + \\epsilon}} \\odot \\gamma"
+    ],
+    "keywords": ["batchnorm", "layernorm", "normalization", "rmsnorm", "covariate shift", "transformers"]
+  },
+  {
+    "id": "kb_transformers",
+    "concept_id": "attention_mech",
+    "title": "Scaled Dot-Product and Multi-Head Attention",
+    "source": "Attention Is All You Need (Vaswani et al., 2017)",
+    "section": "§3.2 Attention & Multi-Head Attention",
+    "citation": "[Vaswani-Attention-2017]",
+    "content": "An attention function maps a query vector and a set of key-value vector pairs to an output. In Scaled Dot-Product Attention, queries Q \\in \\mathbb{R}^{n \\times d_k}, keys K \\in \\mathbb{R}^{m \\times d_k}, and values V \\in \\mathbb{R}^{m \\times d_v} interact via dot products. Scaling by 1 / \\sqrt{d_k} counteracts large magnitude inner products in high dimensions that would otherwise push the softmax into regions with vanishingly small gradients: \\text{Attention}(Q, K, V) = \\text{softmax}\\left(\\frac{QK^T}{\\sqrt{d_k}}\\right) V. Multi-Head Attention projects Q, K, V into h distinct lower-dimensional representation subspaces: \\text{MultiHead}(Q, K, V) = \\text{Concat}(\\text{head}_1, \\dots, \\text{head}_h) W^O, where \\text{head}_i = \\text{Attention}(Q W_i^Q, K W_i^K, V W_i^V). This allows the model to jointly attend to information from different positions, semantic roles, and syntactic relationships simultaneously.",
+    "formulas": [
+      "\\text{Attention}(Q, K, V) = \\text{softmax}\\left(\\frac{QK^T}{\\sqrt{d_k}}\\right) V",
+      "\\text{MultiHead}(Q, K, V) = \\text{Concat}(\\text{head}_1, \\dots, \\text{head}_h) W^O"
+    ],
+    "keywords": ["transformer", "attention", "multi-head attention", "scaled dot-product", "qkv", "vaswani"]
+  },
+  {
+    "id": "kb_lora",
+    "concept_id": "peft_lora",
+    "title": "Low-Rank Adaptation (LoRA) and QLoRA",
+    "source": "LoRA: Low-Rank Adaptation of Large Language Models (Hu et al., 2021)",
+    "section": "§3 Problem Statement & Method",
+    "citation": "[Hu-LoRA-2021]",
+    "content": "Full fine-tuning of multi-billion parameter LLMs requires updating and storing gradients and optimizer states for all weights, demanding immense GPU memory. LoRA freezes the pretrained model parameters W_0 \\in \\mathbb{R}^{d \\times k} and injects trainable rank decomposition matrices: W = W_0 + \\Delta W = W_0 + \\frac{\\alpha}{r} B A, where B \\in \\mathbb{R}^{d \\times r}, A \\in \\mathbb{R}^{r \\times k}, and rank r \\ll \\min(d, k). Matrix A is initialized with Gaussian noise and B with zeros, ensuring \\Delta W = 0 at the start of training. During inference, \\Delta W can be directly merged into W_0 with zero latency overhead. QLoRA (Dettmers et al., 2023) quantizes the base model W_0 to 4-bit NormalFloat (NF4) with Double Quantization and paged optimizers, allowing 65B/70B parameter models to be fine-tuned on a single consumer 48GB/24GB GPU without sacrificing 16-bit performance.",
+    "formulas": [
+      "h = W_0 x + \\Delta W x = W_0 x + \\frac{\\alpha}{r} B A x",
+      "W_{\\text{merged}} = W_0 + \\frac{\\alpha}{r} (B A)"
+    ],
+    "keywords": ["lora", "qlora", "peft", "fine tuning", "low rank adaptation", "quantization", "nf4"]
+  },
+  {
+    "id": "kb_residual_cnn",
+    "concept_id": "cnn_arch",
+    "title": "Deep Residual Learning and Skip Connections",
+    "source": "Deep Residual Learning for Image Recognition (He et al., 2016)",
+    "section": "§3 Deep Residual Learning",
+    "citation": "[He-ResNet-2016]",
+    "content": "As convolutional networks grow deeper, they suffer from the degradation problem: training accuracy saturates and then degrades rapidly due to vanishing gradients in extreme depth. ResNet introduces identity shortcut (skip) connections that bypass one or more stacked layers: \\mathcal{H}(x) = \\mathcal{F}(x, {W_i}) + x. Instead of fitting the desired underlying mapping \\mathcal{H}(x), layers explicitly learn a residual mapping \\mathcal{F}(x) = \\mathcal{H}(x) - x. If an identity mapping is optimal, driving the residual \\mathcal{F}(x) to zero is much easier for gradient descent than learning an identity transformation across multiple nonlinear weight layers. During backpropagation, the gradient \\frac{\\partial \\mathcal{E}}{\\partial x} = \\frac{\\partial \\mathcal{E}}{\\partial \\mathcal{H}} (\\frac{\\partial \\mathcal{F}}{\\partial x} + 1) contains an unbroken '+ 1' term that allows gradients to flow directly back to the earliest layers without attenuation.",
+    "formulas": [
+      "y = \\mathcal{F}(x, \\{W_i\\}) + x",
+      "\\frac{\\partial \\mathcal{E}}{\\partial x_l} = \\frac{\\partial \\mathcal{E}}{\\partial x_L} \\left(1 + \\frac{\\partial}{\\partial x_l} \\sum_{i=l}^{L-1} \\mathcal{F}(x_i, W_i)\\right)"
+    ],
+    "keywords": ["resnet", "cnn", "residual connections", "skip connection", "gradient highway", "he"]
+  },
+  {
+    "id": "kb_dpo",
+    "concept_id": "alignment_rlhf",
+    "title": "Direct Preference Optimization (DPO)",
+    "source": "Direct Preference Optimization (Rafailov et al., 2023)",
+    "section": "§4 Direct Preference Optimization",
+    "citation": "[Rafailov-DPO-2023]",
+    "content": "Reinforcement Learning from Human Feedback (RLHF) typically requires fitting a separate reward model r_\\phi(x, y) on human preference pairs (y_w \\succ y_l) and then optimizing the policy \\pi_\\theta using PPO with a reference policy \\pi_{\\text{ref}} KL divergence penalty. DPO shows that this constrained RL objective can be solved analytically, proving an exact equivalence between the reward function and the optimal policy: r(x, y) = \\beta \\log \\frac{\\pi(y|x)}{\\pi_{\\text{ref}}(y|x)} + \\beta \\log Z(x). Substituting this into the Bradley-Terry preference model yields a simple, stable binary cross-entropy loss directly on the policy parameters \\pi_\\theta: \\mathcal{L}_{\\text{DPO}}(\\theta) = - \\mathbb{E}_{(x, y_w, y_l)} \\left[ \\log \\sigma \\left( \\beta \\log \\frac{\\pi_\\theta(y_w|x)}{\\pi_{\\text{ref}}(y_w|x)} - \\beta \\log \\frac{\\pi_\\theta(y_l|x)}{\\pi_{\\text{ref}}(y_l|x)} \\right) \\right]. This eliminates the complex actor-critic PPO reinforcement learning loop entirely.",
+    "formulas": [
+      "\\mathcal{L}_{\\text{DPO}}(\\pi_\\theta; \\pi_{\\text{ref}}) = -\\mathbb{E}_{(x, y_w, y_l)} \\left[ \\log \\sigma \\left( \\beta \\log \\frac{\\pi_\\theta(y_w|x)}{\\pi_{\\text{ref}}(y_w|x)} - \\beta \\log \\frac{\\pi_\\theta(y_l|x)}{\\pi_{\\text{ref}}(y_l|x)} \\right) \\right]"
+    ],
+    "keywords": ["dpo", "rlhf", "alignment", "direct preference optimization", "bradley terry", "ppo"]
+  },
+  {
+    "id": "kb_rag_retrieval",
+    "concept_id": "rag_agents",
+    "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP",
+    "source": "Retrieval-Augmented Generation (Lewis et al., 2020)",
+    "section": "§2 Methods: RAG Models",
+    "citation": "[Lewis-RAG-2020]",
+    "content": "Large language models store parametric knowledge within their weights, which can be prone to hallucinations, cannot easily be updated, and lacks verifiable source attributions. RAG combines parametric memory (the LLM) with non-parametric memory (a dense vector index). A dense neural retriever (e.g. DPR / SentenceTransformers) encodes the input query q into continuous embedding \\mathbf{E}(q) and retrieves top-k relevant document chunks z using maximum inner product search (MIPS): p_\\eta(z|x) \\propto \\exp(\\mathbf{d}(z)^T \\mathbf{q}(x)). The parametric generator p_\\theta then produces output tokens conditioned on both the user question and the retrieved documents: p(y|x) = \\sum_{z \\in \\text{top-k}} p_\\eta(z|x) \\prod_i p_\\theta(y_i | x, z, y_{1:i-1}).",
+    "formulas": [
+      "p_{\\text{RAG-Sequence}}(y|x) = \\sum_{z \\in \\text{top-}k} p_\\eta(z|x) \\prod_{i=1}^N p_\\theta(y_i|x, z, y_{1:i-1})",
+      "\\text{Score}(q, d) = \\frac{\\vec{e}_q \\cdot \\vec{e}_d}{\\|\\vec{e}_q\\| \\|\\vec{e}_d\\|}"
+    ],
+    "keywords": ["rag", "retrieval augmented generation", "vector search", "dense passage retrieval", "embeddings", "lewis"]
+  },
+  {
+    "id": "kb_ai_intro_sc",
+    "concept_id": "ai_intro_sc",
+    "title": "Soft Computing vs. Hard Computing and AI Perspectives",
+    "source": "Fuzzy Logic, Neural Networks, and Soft Computing (Zadeh, 1994, CACM)",
+    "section": "§1 Soft Computing vs Hard Computing",
+    "citation": "[Zadeh-SoftComputing-1994]",
+    "content": "Hard computing is based on binary Boolean logic, crisp systems, numerical analysis, and precise mathematical models. Its guiding principle is precision, certainty, and mathematical rigor. However, real-world problems often exhibit high dimensionality, non-linearity, and pervasive imprecision. Soft computing, introduced by Lotfi A. Zadeh, departs from conventional hard computing by exploiting the tolerance for imprecision, uncertainty, approximate reasoning, and partial truth to achieve tractability, robustness, and low solution cost. The primary constituents of soft computing are Fuzzy Logic (FL, addressing imprecision and approximate reasoning), Neuro-Computing (NN, providing learning, adaptation, and generalization), and Evolutionary/Probabilistic Reasoning (GA/PR, providing global search and optimization). Neuro-computing mirrors biological neural structures with massive parallelism, fault tolerance, and associative memory.",
+    "formulas": [
+      "\\text{Soft Computing Principle: } \\text{Tolerance for Imprecision, Uncertainty, and Partial Truth} \\implies \\text{Tractability + Robustness}",
+      "\\mathcal{SC} = \\mathcal{FL} \\cup \\mathcal{NN} \\cup \\mathcal{EC} \\cup \\mathcal{PR}"
+    ],
+    "keywords": ["soft computing", "hard computing", "zadeh", "neuro computing", "tolerance for imprecision", "partial truth", "learning and adaptation", "co1"]
+  },
+  {
+    "id": "kb_search_uninformed",
+    "concept_id": "search_uninformed",
+    "title": "State-Space Representation and Uninformed Search (BFS & DFS)",
+    "source": "Artificial Intelligence: A Modern Approach (Russell & Norvig, 2020)",
+    "section": "§3.3–3.4 Uninformed Search Strategies",
+    "citation": "[Russell-Norvig-AIMA-§3.4]",
+    "content": "Problem solving in AI can be formulated as systematic search across a state space. A formal problem consists of five components: Initial state s_0, Actions(s), Transition model Result(s, a), Goal test IsGoal(s), and Path cost c(s, a, s'). Breadth-First Search (BFS) explores the state space level-by-level using a FIFO queue. BFS is complete if the branching factor b is finite, and optimal for uniform step costs, but incurs time complexity O(b^d) and space complexity O(b^d), where d is the shallowest goal depth. Due to exponential memory consumption, BFS quickly exhausts RAM. Depth-First Search (DFS) explores the deepest unexpanded nodes first using a LIFO stack. In infinite state spaces or graphs with cycles, DFS is not complete and not optimal, but its space complexity is modest: O(b * m), where m is the maximum path depth.",
+    "formulas": [
+      "\\text{BFS Space: } O(b^d), \\quad \\text{BFS Time: } O(b^d)",
+      "\\text{DFS Space: } O(b \\cdot m), \\quad \\text{DFS Time: } O(b^m)"
+    ],
+    "keywords": ["bfs", "dfs", "uninformed search", "state space", "branching factor", "path cost", "goal test", "co2"]
+  },
+  {
+    "id": "kb_search_informed",
+    "concept_id": "search_informed",
+    "title": "Informed Heuristic Search and the A* Algorithm",
+    "source": "A Formal Basis for Heuristic Determination of Minimum Cost Paths (Hart, Nilsson & Raphael, 1968)",
+    "section": "§2 Evaluation Functions and A* Optimality",
+    "citation": "[Hart-Nilsson-AStar-1968]",
+    "content": "Informed search utilizes domain-specific heuristic functions h(n) estimating the cheapest cost from node n to a goal state. Greedy Best-First Search expands the node with minimum h(n), which is greedy but neither complete nor optimal. The A* algorithm evaluates nodes using f(n) = g(n) + h(n), combining known path cost from the start node g(n) with estimated remaining cost h(n). A* is guaranteed to find an optimal path on trees if h(n) is admissible (never overestimates true cost: h(n) <= h*(n) and h(goal) = 0). On graphs, A* is optimal without node re-opening if h(n) is consistent (monotonic), satisfying the triangle inequality: h(n) <= c(n, a, n') + h(n'). If heuristic h_2(n) >= h_1(n) for all non-goal nodes, h_2 dominates h_1 and expands fewer or equal nodes.",
+    "formulas": [
+      "f(n) = g(n) + h(n)",
+      "h(n) \\le h^*(n) \\quad (\\text{Admissibility})",
+      "h(n) \\le c(n, a, n') + h(n') \\quad (\\text{Consistency / Monotonicity})"
+    ],
+    "keywords": ["a*", "informed search", "heuristic", "greedy best first", "admissible", "consistent", "manhattan distance", "co2"]
+  },
+  {
+    "id": "kb_search_local",
+    "concept_id": "search_local",
+    "title": "Local Search, Simulated Annealing, and Adversarial Minimax",
+    "source": "Optimization by Simulated Annealing (Kirkpatrick, Gelatt & Vecchi, 1983)",
+    "section": "§1 Local Search & Metropolis Criterion",
+    "citation": "[Kirkpatrick-Annealing-1983]",
+    "content": "Local search algorithms operate on complete state formulations using current states rather than systematic paths. Hill-climbing greedily moves to neighboring states with higher objective value, but frequently gets trapped in local maxima, ridges, and plateaus. Simulated Annealing escapes local extrema by introducing stochastic exploration inspired by metallurgical annealing: if neighbor s' has Delta E = obj(s') - obj(s) > 0, the move is always accepted; if Delta E < 0 (downhill move), it is accepted with Metropolis probability P = exp(Delta E / T), where temperature T decreases over a cooling schedule. In 2-player zero-sum games, Minimax computes optimal strategies by maximizing utility for MAX and minimizing for MIN: v(s) = max_a min_s' U(s'). Alpha-Beta pruning prunes subtrees without altering minimax values whenever alpha >= beta, reducing effective branching factor from b to sqrt(b) under optimal move ordering.",
+    "formulas": [
+      "P(\\text{accept downhill}) = \\exp\\left(\\frac{\\Delta E}{T}\\right)",
+      "\\text{Alpha-Beta Pruning Condition: } \\alpha \\ge \\beta"
+    ],
+    "keywords": ["local search", "hill climbing", "simulated annealing", "minimax", "alpha beta pruning", "metropolis", "co2"]
+  },
+  {
+    "id": "kb_knowledge_logic",
+    "concept_id": "knowledge_logic",
+    "title": "Propositional Logic (PL) and First-Order Predicate Logic (FOPL)",
+    "source": "Artificial Intelligence: A Modern Approach (Russell & Norvig, 2020)",
+    "section": "§7–§8 Logical Agents & First-Order Logic",
+    "citation": "[Russell-Norvig-AIMA-§8.2]",
+    "content": "Knowledge-based systems represent facts symbolically. Propositional Logic (PL) uses boolean proposition symbols (P, Q) and connectives (negation, conjunction, disjunction, implication, biconditional). PL is declarative and compositional, but lacks expressiveness to describe objects, relations, and quantifiers concisely. First-Order Predicate Logic (FOPL) enhances expressiveness by introducing objects, predicates P(x), functions f(x), and quantifiers: Universal (forall x P(x)) and Existential (exists x P(x)). An inference procedure is sound if it derives only entailed sentences (KB |- alpha implies KB |= alpha); it is complete if it derives every entailed sentence. First-Order Logic is semi-decidable: if a sentence is entailed, an algorithm can verify it, but if unentailed, it may run infinitely.",
+    "formulas": [
+      "\\forall x [\\text{Cat}(x) \\implies \\text{Mammal}(x)]",
+      "\\exists x [\\text{Dog}(x) \\land \\text{Friendly}(x)]",
+      "\\text{Soundness: } KB \\vdash \\alpha \\implies KB \\models \\alpha"
+    ],
+    "keywords": ["propositional logic", "fopl", "predicate logic", "knowledge base", "soundness", "completeness", "entailment", "co3"]
+  },
+  {
+    "id": "kb_inference_fopl",
+    "concept_id": "inference_fopl",
+    "title": "Inference Chaining and Robinson's Resolution Refutation",
+    "source": "A Machine-Oriented Logic Based on the Resolution Principle (Robinson, 1965, JACM)",
+    "section": "§1–§5 Unification and Resolution Principle",
+    "citation": "[Robinson-Resolution-1965]",
+    "content": "Inference rules derive new truths from existing knowledge bases. Forward Chaining is data-driven: it fires rules whose premises match known facts until the goal is added. Backward Chaining is goal-driven: it starts from the goal and recurses backward to find premises. Robinson's Resolution Principle provides a sound and complete refutation rule for First-Order Logic. Sentences are converted into Conjunctive Normal Form (CNF) via 8 steps: eliminate implications, move negations inward (De Morgan's laws), standardize variables, skolemize existential quantifiers (Skolem constants/functions), drop universal quantifiers, and distribute OR over AND. Resolution refutation negates the target query alpha and adds not(alpha) to KB. Clauses with complementary literals L1 and not(L2) resolve via Most General Unifier (MGU) substitution theta: if resolution produces the empty clause box (NIL), contradiction is proven, confirming KB |= alpha.",
+    "formulas": [
+      "\\frac{l_1 \\lor \\dots \\lor l_k, \\quad m_1 \\lor \\dots \\lor m_n}{(l_1 \\lor \\dots \\lor l_{i-1} \\lor l_{i+1} \\dots \\lor m_1 \\dots) \\theta} \\quad (\\text{where } l_i \\theta = \\neg m_j \\theta)",
+      "KB \\land \\neg \\alpha \\vdash \\Box \\implies KB \\models \\alpha"
+    ],
+    "keywords": ["resolution refutation", "unification", "mgu", "cnf", "skolemization", "forward chaining", "backward chaining", "robinson", "co3"]
+  },
+  {
+    "id": "kb_uncertainty_prob",
+    "concept_id": "uncertainty_prob",
+    "title": "Uncertain Reasoning, Bayes' Rule, and Probabilistic Independence",
+    "source": "Probabilistic Reasoning in Intelligent Systems (Pearl, 1988)",
+    "section": "§2 Conditional Probability and Bayes Networks",
+    "citation": "[Pearl-ProbReasoning-1988]",
+    "content": "Real-world AI systems operate under uncertainty caused by partial observability, non-deterministic actions, and sensor noise. Probability theory assigns degrees of belief. The fundamental axioms of probability define non-negativity P(A) >= 0, unity P(Omega) = 1, and additivity P(A or B) = P(A) + P(B) - P(A and B). Conditional probability P(A|B) = P(A, B) / P(B) represents probability of A given evidence B. Bayes' Rule computes posterior probability from prior probability and likelihood: P(H|E) = [P(E|H) * P(H)] / P(E). Conditional independence allows factorization of joint distributions: P(X, Y | Z) = P(X|Z) * P(Y|Z), reducing exponential parameters in Bayesian Belief Networks.",
+    "formulas": [
+      "P(H|E) = \\frac{P(E|H) \\cdot P(H)}{P(E)} = \\frac{P(E|H) \\cdot P(H)}{\\sum_{i} P(E|H_i) P(H_i)}",
+      "P(X_1, \\dots, X_n) = \\prod_{i=1}^n P(X_i | \\text{Parents}(X_i))"
+    ],
+    "keywords": ["bayes rule", "probability", "uncertainty", "prior", "posterior", "likelihood", "conditional independence", "bayesian network", "co3"]
+  },
+  {
+    "id": "kb_fuzzy_sets",
+    "concept_id": "fuzzy_sets_fuzzification",
+    "title": "Fuzzy Set Theory: Membership Functions and Fuzzy Operations",
+    "source": "Fuzzy Sets (Zadeh, 1965, Information and Control)",
+    "section": "§1 Definitions and Operations on Fuzzy Sets",
+    "citation": "[Zadeh-FuzzySets-1965]",
+    "content": "Classical (crisp) set theory allows only binary membership chi_A(x) in {0, 1}. In contrast, Lotfi Zadeh's Fuzzy Set Theory generalizes membership to a continuous characteristic function mu_A(x) in [0, 1], representing gradual grades of membership. A fuzzy set A in universe of discourse X is defined as A = {(x, mu_A(x)) | x in X}. Common membership functions include: (1) Triangular ('trimf'): defined by parameters (a, b, c) with peak at b and linear slopes; (2) Trapezoidal ('trapmf'): defined by (a, b, c, d) with flat plateau [b, c]; (3) Gaussian: defined by mean c and spread sigma: mu(x) = exp(-(x-c)^2 / (2 sigma^2)). Standard Zadeh fuzzy operations include: Fuzzy Union (OR / T-conorm): mu_{A cup B}(x) = max(mu_A(x), mu_B(x)); Fuzzy Intersection (AND / T-norm): mu_{A cap B}(x) = min(mu_A(x), mu_B(x)); Fuzzy Complement (NOT): mu_{not A}(x) = 1 - mu_A(x). The alpha-cut of A is crisp set A_alpha = {x in X | mu_A(x) >= alpha}.",
+    "formulas": [
+      "\\mu_{\\text{trimf}}(x; a, b, c) = \\max\\left(0, \\min\\left(\\frac{x - a}{b - a}, \\frac{c - x}{c - b}\\right)\\right)",
+      "\\mu_{A \\cup B}(x) = \\max(\\mu_A(x), \\mu_B(x)), \\quad \\mu_{A \\cap B}(x) = \\min(\\mu_A(x), \\mu_B(x))",
+      "\\mu_{\\neg A}(x) = 1 - \\mu_A(x)"
+    ],
+    "keywords": ["fuzzy set", "membership function", "trimf", "trapmf", "t-norm", "t-conorm", "alpha cut", "zadeh", "co4"]
+  },
+  {
+    "id": "kb_fuzzy_fis",
+    "concept_id": "fuzzy_reasoning_fis",
+    "title": "Fuzzy Inference Systems (FIS): Mamdani vs. Sugeno / TSK and Defuzzification",
+    "source": "An Experiment in Linguistic Synthesis with a Fuzzy Logic Controller (Mamdani & Assilian, 1975)",
+    "section": "§2 Fuzzy Reasoning and Defuzzification",
+    "citation": "[Mamdani-Assilian-FIS-1975]",
+    "content": "A Fuzzy Inference System (FIS) maps crisp inputs to crisp outputs through four stages: (1) Fuzzification converts crisp inputs into degrees of membership across linguistic terms; (2) Rule Evaluation fires IF-THEN rules using T-norms (min or product) to compute rule firing strengths w_i; (3) Aggregation combines individual rule outputs using T-conorm (max or sum); (4) Defuzzification converts the aggregate fuzzy output into a single crisp scalar. Mamdani FIS uses fuzzy propositions in both antecedent AND consequent ('IF x is A THEN y is B'). Its standard defuzzifier is the Centroid / Center of Area (COA): z* = (int z mu_C(z) dz) / (int mu_C(z) dz). In contrast, Takagi-Sugeno-Kang (TSK / Sugeno) FIS uses mathematical linear polynomial functions in the consequent ('IF x is A and y is B THEN z = p*x + q*y + r'). Sugeno defuzzification uses computationally cheap Weighted Average: z* = (sum w_i * z_i) / (sum w_i). Sugeno FIS is computationally efficient and directly amenable to optimization algorithms like ANFIS, whereas Mamdani FIS offers high human interpretability.",
+    "formulas": [
+      "\\text{Mamdani Centroid: } z^* = \\frac{\\int z \\cdot \\mu_C(z) \\, dz}{\\int \\mu_C(z) \\, dz}",
+      "\\text{Sugeno Weighted Average: } z^* = \\frac{\\sum_{i=1}^M w_i \\cdot z_i}{\\sum_{i=1}^M w_i} \\quad \\text{where } z_i = p_i x + q_i y + r_i"
+    ],
+    "keywords": ["mamdani", "sugeno", "tsk", "fuzzy inference system", "defuzzification", "centroid", "weighted average", "rule evaluation", "co4"]
+  },
+  {
+    "id": "kb_neural_basics_mcp",
+    "concept_id": "neural_basics_mcp",
+    "title": "McCulloch-Pitts Neuron and Biological Neural Analogues",
+    "source": "A Logical Calculus of the Ideas Immanent in Nervous Activity (McCulloch & Pitts, 1943)",
+    "section": "§1 Formal Neurons and Threshold Logic",
+    "citation": "[McCulloch-Pitts-Neuron-1943]",
+    "content": "Biological neurons transmit electrical spikes via dendrites (inputs), cell body / soma (summation), axon (transmission line), and synapses (junctions with variable neurotransmitter conductance). Warren McCulloch and Walter Pitts introduced the first mathematical model of a formal artificial neuron in 1943. The McCulloch-Pitts (MCP) neuron operates on binary inputs x_i in {0, 1} with fixed weights w_i and a firing threshold theta. MCP neurons feature two distinct input types: Excitatory inputs that add to activation sum, and Inhibitory inputs that absolutely prevent firing if active (veto mechanism). When no inhibitory signal is present, output y = 1 if sum_i x_i >= theta, and y = 0 otherwise. MCP neurons can implement fundamental Boolean logic operations: AND (theta = n for n excitatory inputs), OR (theta = 1), and NOT (1 excitatory input with 1 inhibitory input). However, MCP weights are fixed and cannot learn from data.",
+    "formulas": [
+      "y = \\begin{cases} 1 & \\text{if } \\sum_{i=1}^n x_i \\ge \\theta \\text{ and no inhibitory input is active} \\\\ 0 & \\text{otherwise} \\end{cases}"
+    ],
+    "keywords": ["mcculloch pitts", "biological neuron", "threshold logic", "excitatory", "inhibitory", "boolean logic", "soma", "axon", "co5"]
+  },
+  {
+    "id": "kb_perceptron_backprop",
+    "concept_id": "perceptron_backprop",
+    "title": "Rosenblatt's Perceptron, Linear Separability XOR Limitation, and Backpropagation",
+    "source": "Perceptrons: An Introduction to Computational Geometry (Minsky & Papert, 1969)",
+    "section": "§0 & §1 Linear Separability and The XOR Dilemma",
+    "citation": "[Minsky-Papert-Perceptrons-1969]",
+    "content": "Frank Rosenblatt (1958) introduced the learnable Perceptron: y = step(w^T x + b). The Perceptron Learning Rule updates weights iteratively on misclassified samples: Delta w_i = eta (y - y_hat) x_i. The Perceptron Convergence Theorem guarantees convergence in finite steps if and only if the data is linearly separable. In 1969, Marvin Minsky and Seymour Papert proved that a single-layer perceptron CANNOT solve non-linearly separable problems such as XOR (Exclusive-OR: (0,0)->0, (0,1)->1, (1,0)->1, (1,1)->0), which caused the first 'AI Winter'. Resolving the XOR dilemma requires Multi-Layer Perceptrons (MLP) with non-linear activation functions (Sigmoid, Tanh, ReLU). Learning in MLPs is achieved via the Error Backpropagation algorithm (Rumelhart, Hinton & Williams, 1986), which utilizes the Generalized Delta Rule and the multivariable chain rule to compute loss gradients across hidden layers.",
+    "formulas": [
+      "\\text{Perceptron Update: } \\Delta w_i = \\eta \\cdot (y - \\hat{y}) \\cdot x_i",
+      "\\text{XOR Inseparability: } \\nexists (w_1, w_2, b) \\text{ satisfying } w_1(0)+w_2(0)+b < 0, \\dots, w_1(1)+w_2(1)+b < 0",
+      "\\delta_j = \\begin{cases} (y_j - \\hat{y}_j) f'(z_j) & \\text{output layer} \\\\ \\sum_k \\delta_k w_{kj} f'(z_j) & \\text{hidden layer} \\end{cases}"
+    ],
+    "keywords": ["perceptron", "linear separability", "xor", "minsky papert", "rosenblatt", "backpropagation", "delta rule", "co5"]
+  },
+  {
+    "id": "kb_unsupervised_som_hebb",
+    "concept_id": "unsupervised_som_hebb",
+    "title": "Hebbian Learning, Competitive Networks, and Kohonen Self-Organizing Maps (SOM)",
+    "source": "The Self-Organizing Map (Kohonen, 1990, IEEE Proceedings)",
+    "section": "§2 Competitive Learning and Topological Maps",
+    "citation": "[Kohonen-SOM-1990]",
+    "content": "Unsupervised neural learning discovers latent structure without ground-truth labels. Donald Hebb's Postulate (1949) states that when neuron A repeatedly triggers neuron B, synaptic efficacy increases ('neurons that fire together wire together'): Delta w_{ij} = eta * y_i * x_j. In Competitive Learning, output neurons compete for activation in a Winner-Take-All (WTA) manner: the neuron whose weight vector w_c is closest in Euclidean distance to input x becomes the winning Best Matching Unit (BMU): c = argmin_i ||x - w_i||. Teuvo Kohonen's Self-Organizing Map (SOM) extends WTA by preserving topological neighborhood relationships on a 1D/2D lattice: not only the winner, but also its spatial neighbors within radius sigma(t) update their weights: Delta w_i = eta(t) * h_{ci}(t) * (x - w_i), where neighborhood function h_{ci}(t) = exp(-||r_c - r_i||^2 / (2 sigma^2(t))). Over time, learning rate eta(t) and neighborhood radius sigma(t) decay monotonically, organizing complex high-dimensional feature distributions into smooth 2D topological feature maps.",
+    "formulas": [
+      "\\text{Hebbian Rule: } \\Delta w_{ij} = \\eta \\cdot y_i \\cdot x_j",
+      "\\text{BMU: } c = \\arg\\min_i \\|x - w_i\\|_2",
+      "\\Delta w_i = \\eta(t) \\cdot h_{ci}(t) \\cdot (x - w_i) \\quad \\text{where } h_{ci}(t) = \\exp\\left(-\\frac{\\|r_c - r_i\\|^2}{2\\sigma^2(t)}\\right)"
+    ],
+    "keywords": ["hebbian learning", "som", "kohonen", "self organizing map", "competitive learning", "winner take all", "bmu", "lvq", "co5"]
+  },
+  {
+    "id": "kb_hybrid_anfis",
+    "concept_id": "hybrid_anfis",
+    "title": "Adaptive Neuro-Fuzzy Inference System (ANFIS) and 5-Layer Hybrid Architecture",
+    "source": "ANFIS: Adaptive-Network-Based Fuzzy Inference System (Jang, 1993, IEEE Trans. SMC)",
+    "section": "§2–§3 Architecture and Hybrid Learning Algorithm",
+    "citation": "[Jang-ANFIS-1993]",
+    "content": "Hybrid systems combine the transparent human-interpretable IF-THEN reasoning of Fuzzy Logic with the self-learning, parameter-tuning capability of Artificial Neural Networks. J.-S. R. Jang introduced ANFIS in 1993 as a functional equivalence of a first-order Takagi-Sugeno-Kang (TSK) fuzzy model within a 5-layer feedforward adaptive network: Layer 1 (Fuzzification / Premise Parameters): square nodes computing fuzzy membership values O_{1,i} = mu_{A_i}(x) using parameterized bell/Gaussian functions (parameters {a_i, b_i, c_i}); Layer 2 (Rule Firing Strength): circle nodes performing T-norm product O_{2,i} = w_i = mu_{A_i}(x) * mu_{B_i}(y); Layer 3 (Normalization): circle nodes calculating normalized firing strengths O_{3,i} = wbar_i = w_i / (w_1 + w_2); Layer 4 (Consequent Parameters): adaptive nodes computing first-order linear polynomials O_{4,i} = wbar_i * f_i = wbar_i * (p_i x + q_i y + r_i); Layer 5 (Overall Output): single fixed summation node computing final crisp output O_{5,1} = sum_i wbar_i f_i = (sum w_i f_i) / (sum w_i). ANFIS employs a Hybrid Learning Algorithm: during the forward pass, premise parameters are held fixed while consequent parameters {p_i, q_i, r_i} are identified globally using Least Squares Estimation (LSE); during the backward pass, consequent parameters are held fixed while premise parameters {a_i, b_i, c_i} are updated via gradient descent backpropagation.",
+    "formulas": [
+      "O_{1,i} = \\mu_{A_i}(x) = \\frac{1}{1 + \\left|\\frac{x - c_i}{a_i}\\right|^{2b_i}} \\quad (\\text{Layer 1})",
+      "O_{2,i} = w_i = \\mu_{A_i}(x) \\cdot \\mu_{B_i}(y), \\quad O_{3,i} = \\bar{w}_i = \\frac{w_i}{\\sum_k w_k}",
+      "O_{4,i} = \\bar{w}_i f_i = \\bar{w}_i (p_i x + q_i y + r_i), \\quad O_{5,1} = \\sum_{i} \\bar{w}_i f_i = \\frac{\\sum w_i f_i}{\\sum w_i}",
+      "\\text{Hybrid Learning: LSE (Forward pass for } \\{p, q, r\\} \\text{) + Backprop (Backward pass for } \\{a, b, c\\}\\text{)}"
+    ],
+    "keywords": ["anfis", "neuro fuzzy", "jang", "hybrid systems", "sugeno", "5 layer architecture", "premise parameters", "consequent parameters", "least squares", "co6"]
+  }
+]

@@ -111,5 +111,37 @@ In this foundational phase, **Layer 1 (Advanced NLP Layer)** is fully implemente
 2. **Schema Validation**: FastAPI validates input using Pydantic `ChatRequest`.
 3. **Pipeline Orchestration**: `ChatbotService.process()` triggers preprocessing, ML prediction, NER extraction, and similarity calculation.
 4. **Decision Evaluation**: `LayerDecision` determines that intent is `study_help` or `programming_help` with high confidence.
-5. **Serialization**: Result formatted into `ChatResponse` containing response text, confidence, entities (`Python`, `Monday`), similarity score, and processing latency.
+5. **Serialization**: Result formatted into `ChatResponse` containing response text, confidence, entities (`Python`, `Monday`), similarity score, processing latency, and structured citations (`CitationItem`).
 6. **Delivery**: Client receives HTTP 200 JSON payload.
+
+---
+
+## 6. Phase 2B: Interactive Citation UI & Literature Drawer
+
+Phase 2B integrates the RAG citation pipeline with the React user interface, providing interactive inline citation badges and a slide-in Literature Drawer.
+
+### Data Flow & Component Architecture
+
+```mermaid
+graph TD
+    API["/chat API Response"] --> MsgState["Message State (text + citations)"]
+    MsgState --> MsgItem["MessageItem Component"]
+    
+    MsgItem --> Parser["renderTextWithCitations()"]
+    Parser --> InlineChips["Inline <CitationChip inline /> ([S1], [S2]...)"]
+    MsgItem --> FooterChips["Footer <CitationChip /> List"]
+    
+    InlineChips -->|Click / Keyboard Enter| OpenDrawer["handleOpenCitation(citation, triggerEl)"]
+    FooterChips -->|Click / Keyboard Enter| OpenDrawer
+    
+    OpenDrawer --> Drawer["<LiteratureDrawer isOpen={true} />"]
+    Drawer -->|Close / Esc| RestoreFocus["Restore Focus to Trigger Badge"]
+```
+
+### Key Capabilities
+- **Inline Citation Mapping**: Regular expressions parse `[S1]`, `[S2]` markers in model output and convert them into `<CitationChip />` components strictly when backed by that message's structured `citations` array.
+- **Unmatched Marker Safety**: Unmatched tags (e.g. `[S99]`) and bracket expressions inside code fences (``arr[S1]``) are preserved as plain text. Model output is never injected via raw HTML.
+- **Accessible Literature Drawer**: Displays source title, PDF filename, physical PDF page numbers, supporting passage, and dense cosine similarity score.
+- **Safe External Navigation**: Only valid `http:` and `https:` URLs are rendered as external hyperlinks; local repository textbooks display verified local attribution without file system paths.
+- **Keyboard & Focus Management**: Supports `Escape` key close and restores focus to the invoking citation badge upon dismissal.
+
